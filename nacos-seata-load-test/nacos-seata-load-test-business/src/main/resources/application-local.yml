@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: business-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+
+seata:
+  registry:
+    nacos:
+      serverAddr: localhost

@@ -15,5 +15,6 @@
         <module>nacos-sentinel-example</module>
         <module>nacos-cmdb-plugin-example</module>
         <module>nacos-health-plugin-example</module>
+        <module>nacos-seata-load-test</module>
     </modules>
 </project>

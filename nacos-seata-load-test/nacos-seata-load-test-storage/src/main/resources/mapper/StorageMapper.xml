@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ypq.persistence.StorageMapper">
+    <resultMap id="BaseResultMap" type="org.ypq.persistence.Storage">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="commodity_code" property="commodityCode" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="findByCommodityCode" resultType="org.ypq.persistence.Storage">
+        select id, commodity_code commodityCode, count from storage_tbl
+        WHERE commodity_code = #{commodityCode} for update
+    </select>
+
+    <update id="updateById">
+        update storage_tbl set count = #{count,jdbcType=INTEGER}
+        WHERE id = #{id}
+    </update>
+</mapper>
