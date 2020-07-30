@@ -7,6 +7,8 @@ public class Account {
 
     private String userId;
 
+    private BigDecimal freezeMoney;
+
     private BigDecimal money;
 
     public Integer getId() {
@@ -23,6 +25,14 @@ public class Account {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public BigDecimal getFreezeMoney() {
+        return freezeMoney;
+    }
+
+    public void setFreezeMoney(BigDecimal freezeMoney) {
+        this.freezeMoney = freezeMoney;
     }
 
     public BigDecimal getMoney() {

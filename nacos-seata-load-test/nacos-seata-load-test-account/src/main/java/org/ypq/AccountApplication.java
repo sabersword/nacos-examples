@@ -14,11 +14,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class AccountApplication {
 
 	public static void main(String[] args) {
-//		for (int i = 1; i <= 1000; i++) {
-//			System.out.println("INSERT INTO account_tbl (user_id, money) VALUES ('user" + i + "', 1000000000);");
+//		for (int i = 1; i <= 10000; i++) {
+//			System.out.println("INSERT INTO account_tbl (user_id, money) VALUES ('user" + i + "', 1000000);");
 //		}
-//		for (int i = 1; i <= 1000; i++) {
-//			System.out.println("INSERT INTO storage_tbl (commodity_code, count) VALUES ('commodity" + i + "', 1000000000);");
+//		for (int i = 1; i <= 10000; i++) {
+//			System.out.println("INSERT INTO storage_tbl (commodity_code, count) VALUES ('commodity" + i + "', 1000000);");
 //		}
 		SpringApplication.run(AccountApplication.class, args);
 	}

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.ypq.service.OrderService;
 
+import java.util.HashMap;
+
 @RestController
 public class OrderController {
 
@@ -18,6 +20,12 @@ public class OrderController {
     public String create(@RequestParam String userId, @RequestParam String commodityCode, @RequestParam Integer num) {
         System.out.println("order XID " + RootContext.getXID());
         return orderService.create(userId, commodityCode, num);
+    }
+
+    @GetMapping(value = "/tryCreate")
+    public String tryCreate(@RequestParam String userId, @RequestParam String commodityCode, @RequestParam Integer num) {
+        System.out.println("order XID " + RootContext.getXID());
+        return orderService.tryCreate(null, userId, commodityCode, num, new HashMap<>());
     }
 
 }

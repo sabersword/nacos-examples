@@ -8,6 +8,10 @@ public interface AccountMapper {
 
     Account selectByUserId(@Param("userId") String userId);
 
-    int updateById(Account record);
+    int updateMoneyById(Account record);
+
+    int updateFreezeById(Account record);
+
+    int updateFreezeAndMoneyById(Account record);
 
 }

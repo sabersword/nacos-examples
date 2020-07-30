@@ -6,6 +6,8 @@ public class Storage {
 
     private String commodityCode;
 
+    private Integer freezeCount;
+
     private Integer count;
 
     public Integer getId() {
@@ -22,6 +24,14 @@ public class Storage {
 
     public void setCommodityCode(String commodityCode) {
         this.commodityCode = commodityCode;
+    }
+
+    public Integer getFreezeCount() {
+        return freezeCount;
+    }
+
+    public void setFreezeCount(Integer freezeCount) {
+        this.freezeCount = freezeCount;
     }
 
     public Integer getCount() {

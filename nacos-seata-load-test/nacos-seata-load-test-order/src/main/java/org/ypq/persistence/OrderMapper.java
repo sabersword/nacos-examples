@@ -7,4 +7,8 @@ public interface OrderMapper {
 
     int insert(Order record);
 
+    int updateNormal(Order record);
+
+    int delete(Order record);
+
 }

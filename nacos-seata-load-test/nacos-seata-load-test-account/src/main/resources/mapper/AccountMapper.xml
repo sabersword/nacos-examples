@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="org.ypq.persistence.Account">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="freeze_money" property="freezeMoney" jdbcType="DECIMAL"/>
         <result column="money" property="money" jdbcType="DECIMAL"/>
     </resultMap>
 
@@ -12,9 +13,22 @@
         WHERE user_id = #{userId} for update
     </select>
 
-    <update id="updateById" parameterType="org.ypq.persistence.Account">
+    <update id="updateMoneyById" parameterType="org.ypq.persistence.Account">
       update account_tbl
       set money = #{money,jdbcType=DECIMAL}
+      where id = #{id}
+    </update>
+
+    <update id="updateFreezeById" parameterType="org.ypq.persistence.Account">
+      update account_tbl
+      set freeze_money = #{freezeMoney,jdbcType=DECIMAL}
+      where id = #{id}
+    </update>
+
+    <update id="updateFreezeAndMoneyById" parameterType="org.ypq.persistence.Account">
+      update account_tbl
+      set freeze_money = #{freezeMoney,jdbcType=DECIMAL},
+          money = #{money,jdbcType=DECIMAL}
       where id = #{id}
     </update>
 

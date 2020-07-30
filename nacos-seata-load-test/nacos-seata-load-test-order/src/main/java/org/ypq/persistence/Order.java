@@ -15,6 +15,8 @@ public class Order {
 
     private BigDecimal money;
 
+    private String status;
+
     public Integer getId() {
         return id;
     }
@@ -53,5 +55,13 @@ public class Order {
 
     public void setMoney(BigDecimal money) {
         this.money = money;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

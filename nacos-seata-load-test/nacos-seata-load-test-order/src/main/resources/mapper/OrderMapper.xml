@@ -7,11 +7,24 @@
         <result column="commodity_code" property="commodityCode" jdbcType="VARCHAR"/>
         <result column="count" property="count" jdbcType="INTEGER"/>
         <result column="money" property="money" jdbcType="DECIMAL"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <insert id="insert" parameterType="org.ypq.persistence.Order">
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="org.ypq.persistence.Order">
         insert into order_tbl (user_id,commodity_code,count,money)
         values (#{userId,jdbcType=VARCHAR}, #{commodityCode,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL})
+
     </insert>
+
+    <update id="updateNormal" parameterType="org.ypq.persistence.Order">
+        update order_tbl
+          set status=#{status,jdbcType=VARCHAR}
+          where id = #{id}
+    </update>
+
+    <update id="delete" parameterType="org.ypq.persistence.Order">
+        delete from order_tbl
+          where id = #{id}
+    </update>
 
 </mapper>

@@ -21,4 +21,10 @@ public class StorageController {
         return storageService.deduct(commodityCode, num);
     }
 
+    @GetMapping(value = "/tryDeduct")
+    public String tryDeduct(@RequestParam String commodityCode, @RequestParam Integer num) throws SQLException {
+        System.out.println("storage XID " + RootContext.getXID());
+        return storageService.tryDeduct(commodityCode, num);
+    }
+
 }

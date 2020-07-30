@@ -10,5 +10,9 @@ public interface StorageMapper {
 
     Storage findByCommodityCode(@Param("commodityCode") String commodityCode);
 
-    int updateById(Storage record);
+    int updateCountById(Storage record);
+
+    int updateFreezeById(Storage record);
+
+    int updateFreezeAndCountById(Storage record);
 }

@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="org.ypq.persistence.Storage">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="commodity_code" property="commodityCode" jdbcType="VARCHAR"/>
+        <result column="freeze_count" property="freezeCount" jdbcType="INTEGER"/>
         <result column="count" property="count" jdbcType="INTEGER"/>
     </resultMap>
 
@@ -12,8 +13,21 @@
         WHERE commodity_code = #{commodityCode} for update
     </select>
 
-    <update id="updateById">
+    <update id="updateCountById">
         update storage_tbl set count = #{count,jdbcType=INTEGER}
         WHERE id = #{id}
     </update>
+
+    <update id="updateFreezeById">
+        update storage_tbl set count = #{freeze_count,jdbcType=INTEGER}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateFreezeAndCountById">
+        update storage_tbl
+        set count = #{freeze_count,jdbcType=INTEGER},
+        set count = #{count,jdbcType=INTEGER}
+        WHERE id = #{id}
+    </update>
+
 </mapper>
