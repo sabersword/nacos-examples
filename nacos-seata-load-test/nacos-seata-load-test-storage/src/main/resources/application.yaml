@@ -1,13 +1,20 @@
+server:
+  port: 9771
 spring:
   application:
-    name: business-service
+    name: storage-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    schema: classpath:storage-schema.sql
+    initialization-mode: always
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-wz90pf1xlo54jshv490210.mysql.rds.aliyuncs.com:3306/db_storage?useSSL=false&serverTimezone=UTC
+    username: ypq
+    password: 1qaz!QAZ
   cloud:
     nacos:
       discovery:
         server-addr: 172.18.22.82:8848
-
-server:
-  port: 9770
 
 seata:
   enabled: true
@@ -24,8 +31,8 @@ seata:
     rm:
       async-commit-buffer-limit: 1000
       lock:
-        retry-interval: 10
-        retry-policy-branch-rollback-on-conflict: true
+        retry-interval: 100
+        retry-policy-branch-rollback-on-conflict: false
         retry-times: 30
       report-retry-count: 5
       report-success-enable: false
@@ -65,3 +72,4 @@ seata:
       namespace:
       serverAddr: 172.18.22.82
       cluster: defaultTxCluster
+

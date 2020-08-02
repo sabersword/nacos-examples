@@ -22,10 +22,4 @@ public class OrderController {
         return orderService.create(userId, commodityCode, num);
     }
 
-    @GetMapping(value = "/tryCreate")
-    public String tryCreate(@RequestParam String userId, @RequestParam String commodityCode, @RequestParam Integer num) {
-        System.out.println("order XID " + RootContext.getXID());
-        return orderService.tryCreate(null, userId, commodityCode, num, new HashMap<>());
-    }
-
 }

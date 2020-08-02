@@ -8,8 +8,8 @@
         <result column="money" property="money" jdbcType="DECIMAL"/>
     </resultMap>
 
-    <select id="selectByUserId" resultType="org.ypq.persistence.Account">
-        select id, user_id, money from account_tbl
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select id, user_id, freeze_money, money from account_tbl
         WHERE user_id = #{userId} for update
     </select>
 

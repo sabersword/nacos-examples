@@ -29,17 +29,4 @@ public class BusinessController {
         }
     }
 
-    /**
-     * 减库存，下订单
-     */
-    @GetMapping(value = "/businessTCC")
-    public String purchaseTCC(String userId, String commodityCode, int orderCount) {
-        LOGGER.info("purchaseTCC begin ... xid: " + RootContext.getXID());
-        try {
-            return businessService.purchaseTCC(userId, commodityCode, orderCount);
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-    }
-
 }

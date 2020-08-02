@@ -8,24 +8,24 @@
         <result column="count" property="count" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="findByCommodityCode" resultType="org.ypq.persistence.Storage">
-        select id, commodity_code commodityCode, count from storage_tbl
+    <select id="findByCommodityCode" resultMap="BaseResultMap">
+        select id, commodity_code, freeze_count, count from storage_tbl
         WHERE commodity_code = #{commodityCode} for update
     </select>
 
-    <update id="updateCountById">
+    <update id="updateCountById" parameterType="org.ypq.persistence.Storage">
         update storage_tbl set count = #{count,jdbcType=INTEGER}
         WHERE id = #{id}
     </update>
 
-    <update id="updateFreezeById">
-        update storage_tbl set count = #{freeze_count,jdbcType=INTEGER}
+    <update id="updateFreezeById" parameterType="org.ypq.persistence.Storage">
+        update storage_tbl set count = #{freezeCount,jdbcType=INTEGER}
         WHERE id = #{id}
     </update>
 
-    <update id="updateFreezeAndCountById">
+    <update id="updateFreezeAndCountById" parameterType="org.ypq.persistence.Storage">
         update storage_tbl
-        set count = #{freeze_count,jdbcType=INTEGER},
+        set count = #{freezeCount,jdbcType=INTEGER},
         set count = #{count,jdbcType=INTEGER}
         WHERE id = #{id}
     </update>

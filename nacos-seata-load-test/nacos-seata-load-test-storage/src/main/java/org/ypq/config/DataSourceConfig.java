@@ -17,6 +17,7 @@ public class DataSourceConfig {
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource druidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
+        druidDataSource.setMaxActive(30);
         return druidDataSource;
     }
 

@@ -1,16 +1,14 @@
 package org.ypq.service;
 
 import io.seata.rm.tcc.api.BusinessActionContext;
-import io.seata.rm.tcc.api.BusinessActionContextParameter;
-import io.seata.rm.tcc.api.TwoPhaseBusinessAction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.ypq.persistence.Storage;
 import org.ypq.persistence.StorageMapper;
 
-@Service
-public class StorageService {
+@Component
+public class StorageService implements IStorage{
 
     @Autowired
     private StorageMapper storageMapper;
@@ -26,38 +24,34 @@ public class StorageService {
         return "the rest of " + commodityCode + " is " + storage.getCount() + "   ";
     }
 
-    @TwoPhaseBusinessAction(name = "orderTcc", commitMethod = "confirmDeduct", rollbackMethod = "cancelDeduct")
-    @Transactional
-    public String tryDeduct(BusinessActionContext actionContext,
-                            @BusinessActionContextParameter(paramName = "commodityCode") String commodityCode,
-                            @BusinessActionContextParameter(paramName = "count") int count) {
+    @Override
+    public boolean prepare(BusinessActionContext actionContext, String commodityCode, int orderCount) {
         Storage storage = storageMapper.findByCommodityCode(commodityCode);
-        storage.setFreezeCount(storage.getFreezeCount() + count);
+        storage.setFreezeCount(storage.getFreezeCount() + orderCount);
         storageMapper.updateFreezeById(storage);
-        return "the rest of " + commodityCode + " is " + storage.getCount() + "   ";
+        return true;
     }
 
-    @Transactional
-    public String confirmDeduct(BusinessActionContext actionContext) {
+    @Override
+    public boolean commit(BusinessActionContext actionContext) {
         String commodityCode = (String) actionContext.getActionContext("commodityCode");
-        int count = (Integer) actionContext.getActionContext("count");
+        int count = (Integer) actionContext.getActionContext("orderCount");
 
         Storage storage = storageMapper.findByCommodityCode(commodityCode);
         storage.setFreezeCount(storage.getFreezeCount() - count);
         storage.setCount(storage.getCount() - count);
         storageMapper.updateFreezeAndCountById(storage);
-        return "the rest of " + commodityCode + " is " + storage.getCount() + "   ";
+        return true;
     }
 
-    @Transactional
-    public String cancelDeduct(BusinessActionContext actionContext) {
+    @Override
+    public boolean rollback(BusinessActionContext actionContext) {
         String commodityCode = (String) actionContext.getActionContext("commodityCode");
-        int count = (Integer) actionContext.getActionContext("count");
+        int count = (Integer) actionContext.getActionContext("orderCount");
 
         Storage storage = storageMapper.findByCommodityCode(commodityCode);
         storage.setFreezeCount(storage.getFreezeCount() - count);
         storageMapper.updateFreezeById(storage);
-        return "the rest of " + commodityCode + " is " + storage.getCount() + "   ";
+        return true;
     }
-
 }

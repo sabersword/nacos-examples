@@ -21,13 +21,4 @@ public class AccountController {
         return userId + "'s balance is " + account.getMoney();
     }
 
-    @GetMapping(value = "/tryDeduct")
-    public String tryDeduct(String userId, int num) {
-        Account account = accountService.tryDeduct(null, userId, num);
-        if (account == null) {
-            return "try failed, money not enough " + num ;
-        }
-        return userId + "'s balance is " + account.getMoney();
-    }
-
 }

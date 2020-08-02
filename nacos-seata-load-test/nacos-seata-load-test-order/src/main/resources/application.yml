@@ -1,17 +1,18 @@
 server:
   port: 9772
-
 spring:
   application:
     name: order-service
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://rm-wz90pf1xlo54jshv490210.mysql.rds.aliyuncs.com:3306/db_order?useSSL=false&serverTimezone=UTC
-    username: ypq
-    password: 1qaz!QAZ
     schema: classpath:order-schema.sql
     initialization-mode: always
+    druid:
+      max-active: 30
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://rm-wz90pf1xlo54jshv490210.mysql.rds.aliyuncs.com:3306/db_order?useSSL=false&serverTimezone=UTC
+      username: ypq
+      password: 1qaz!QAZ
   cloud:
     nacos:
       discovery:
